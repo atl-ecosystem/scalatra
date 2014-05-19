@@ -67,7 +67,7 @@ class SwaggerSpec extends ScalatraSpec with JsonMatchers { def is = sequential ^
     (jv \ "resourcePath" must_== listOperationsJValue \ "resourcePath") and {
       val ja = jv \ "apis" \ "path" \\ classOf[JString]
       (ja.size must_== 4) and
-        (ja must haveTheSameElementsAs(List("/pet/{id}", "/pet/findByTags", "/pet/findByStatus", "/pet/")))
+        (ja must containTheSameElementsAs(List("/pet/{id}", "/pet/findByTags", "/pet/findByStatus", "/pet/")))
     }
   }
 

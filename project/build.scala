@@ -331,7 +331,7 @@ object ScalatraBuild extends Build {
     }
 
     private val scalatestVersion: String => String =
-      defaultOrMapped("1.9.1", "2.8.0" -> "1.8", "2.8.1" -> "1.8", "2.8.2" -> "1.8")
+      defaultOrMapped("2.1.6", "2.8.0" -> "1.8", "2.8.1" -> "1.8", "2.8.2" -> "1.8")
 
     private val specsCross = crossMapped("2.8.2" -> "2.8.1", "2.9.2" -> "2.9.1")
     private val specsVersion: String => String =

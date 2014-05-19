@@ -63,7 +63,7 @@ class SwaggerRootServletSpec extends MutableScalatraSpec {
     (jv \ "resourcePath" must_== listOperationsJValue \ "resourcePath") and {
       val ja = jv \ "apis" \ "path" \\ classOf[JString]
       (ja.size must_== 4) and
-        (ja must haveTheSameElementsAs(List("/{id}", "/findByTags", "/findByStatus", "/")))
+        (ja must containTheSameElementsAs(List("/{id}", "/findByTags", "/findByStatus", "/")))
     }
   }
 
