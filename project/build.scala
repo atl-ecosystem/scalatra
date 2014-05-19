@@ -10,7 +10,7 @@ object ScalatraBuild extends Build {
 
   lazy val scalatraSettings = Defaults.defaultSettings ++ ls.Plugin.lsSettings ++ Seq(
     organization := "org.scalatra",
-    crossScalaVersions := Seq("2.10.0"),
+    crossScalaVersions := Seq("2.11.0"),
     scalaVersion <<= (crossScalaVersions) { versions => versions.head },
     scalacOptions ++= Seq("-unchecked", "-deprecation", "-Yinline-warnings", "-Xcheckinit", "-encoding", "utf8", "-feature"),
     scalacOptions ++= Seq("-language:higherKinds", "-language:postfixOps", "-language:implicitConversions", "-language:reflectiveCalls", "-language:existentials"),
@@ -49,6 +49,8 @@ object ScalatraBuild extends Build {
     base = file("core"),
     settings = scalatraSettings ++ Seq(
       libraryDependencies <++= scalaVersion(sv => Seq(
+        scalaParsing,
+        scalaXml,
         servletApi % "provided;test",
         slf4jApi,
         grizzledSlf4j(sv),
@@ -279,6 +281,8 @@ object ScalatraBuild extends Build {
     lazy val scalate: MM           = sv => "org.fusesource.scalate"  %  scalateArtifact(sv)  % scalateVersion(sv)
     lazy val scalatest: MM         = sv => "org.scalatest"           %% "scalatest"          % scalatestVersion(sv)
     lazy val scalaz                     =  "org.scalaz"              %% "scalaz-core"        % "7.0.0-RC1"
+    lazy val scalaParsing               =  "org.scala-lang.modules"  %% "scala-parser-combinators"          % "1.0.1"
+    lazy val scalaXml                   =  "org.scala-lang.modules"  %% "scala-xml"          % "1.0.1"
     lazy val servletApi                 =  "org.eclipse.jetty.orbit" % "javax.servlet"       % "3.0.0.v201112011016" artifacts (Artifact("javax.servlet", "jar", "jar"))
     lazy val slf4jApi                   =  "org.slf4j"               % "slf4j-api"           % "1.7.5"
     lazy val slf4jSimple                =  "org.slf4j"               % "slf4j-simple"        % "1.7.5"
