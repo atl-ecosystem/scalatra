@@ -276,13 +276,13 @@ object ScalatraBuild extends Build {
     lazy val logbackClassic             =  "ch.qos.logback"          %  "logback-classic"    % "1.0.11"
     lazy val mimeUtil                   =  "eu.medsea.mimeutil"      % "mime-util"           % "2.1.3" exclude("org.slf4j", "slf4j-log4j12") exclude("log4j", "log4j")
     lazy val mockitoAll                 =  "org.mockito"             %  "mockito-all"        % "1.9.5"
-    lazy val rl                         =  "org.scalatra.rl"         %% "rl"                 % "0.4.4"
+    lazy val rl                         =  "org.scalatra.rl"         %% "rl"                 % "0.4.10"
     lazy val scalajCollection           =  "org.scalaj"              %% "scalaj-collection"  % "1.2"
-    lazy val scalate: MM           = sv => "org.fusesource.scalate"  %  scalateArtifact(sv)  % scalateVersion(sv)
+    lazy val scalate: MM           = sv => "org.scalatra.scalate"    %  scalateArtifact(sv)  % scalateVersion(sv)
     lazy val scalatest: MM         = sv => "org.scalatest"           %% "scalatest"          % scalatestVersion(sv)
-    lazy val scalaz                     =  "org.scalaz"              %% "scalaz-core"        % "7.0.0-RC1"
     lazy val scalaParsing               =  "org.scala-lang.modules"  %% "scala-parser-combinators"          % "1.0.1"
     lazy val scalaXml                   =  "org.scala-lang.modules"  %% "scala-xml"          % "1.0.1"
+    lazy val scalaz                     =  "org.scalaz"              %% "scalaz-core"        % "7.0.6"
     lazy val servletApi                 =  "org.eclipse.jetty.orbit" % "javax.servlet"       % "3.0.0.v201112011016" artifacts (Artifact("javax.servlet", "jar", "jar"))
     lazy val slf4jApi                   =  "org.slf4j"               % "slf4j-api"           % "1.7.5"
     lazy val slf4jSimple                =  "org.slf4j"               % "slf4j-simple"        % "1.7.5"
@@ -302,24 +302,25 @@ object ScalatraBuild extends Build {
       Map(alternatives: _*) orElse { case _ => default }
 
     private val akkaVersion: String => String =
-      defaultOrMapped("2.1.2", "2.9.3" -> "2.0.5", "2.9.2" -> "2.0.5", "2.9.1" -> "2.0.2")
+      defaultOrMapped("2.3.2", "2.9.3" -> "2.0.5", "2.9.2" -> "2.0.5", "2.9.1" -> "2.0.2")
 
     private val grizzledSlf4jVersion: String => String = {
       case sv if sv startsWith "2.9."   => "0.6.10"
-      case _                            => "1.0.1"
+      case _                            => "1.0.2"
     }
 
     private val httpcomponentsVersion = "4.2.3"
 
     private val jettyVersion = "8.1.12.v20130726"
 
-    private val json4sVersion = "3.2.5"
+    private val json4sVersion = "3.2.9"
 
     private val scalateArtifact: String => String = {
       case sv if sv startsWith "2.8."   => "scalate-core"
       case "2.9.0-1"                    => "scalate-core"
       case sv if sv startsWith "2.9."   => "scalate-core_2.9"
       case sv if sv startsWith "2.10."  => "scalate-core_2.10"
+      case sv if sv startsWith "2.11."  => "scalate-core_2.11"
     }
     private val scalateVersion: String => String = {
       case "2.8.1"                      => "1.5.2-scala_2.8.1"
@@ -327,7 +328,7 @@ object ScalatraBuild extends Build {
       case "2.9.0-1"                    => "1.5.1"
       case "2.9.1"                      => "1.6.1"
       case "2.9.2"                      => "1.6.1"
-      case _                            => "1.6.1"
+      case _                            => "1.7.0"
     }
 
     private val scalatestVersion: String => String =
@@ -341,6 +342,7 @@ object ScalatraBuild extends Build {
       case sv if sv startsWith "2.8."   => "1.5"
       case "2.9.0-1"                    => "1.8.2"
       case sv if sv startsWith "2.9."   => "1.12.4.1"
+      case sv if sv startsWith "2.11."  => "2.3.12"
       case _                            => "1.14"
     }
 
